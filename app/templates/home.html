@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block head %}
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+{% block body %}
+  <div class="row">
+    <div class="col s12 m10">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input type="text" id="search-box">
+          <label for="search-box">Search for anime...</label>
+          <a class="waves-effect waves-light btn" id="search-button"><i class="material-icons left">search</i>Search</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% if trending %}
+  <p>Trending</p>
+    <div class="row valign-wrapper anime-container">
+      {% for anime in trending.data.Page.media %}
+      <a href="{{ url_for('/.watch_anime',animeId=anime.id)}}">
+        <img class="anime-title" src="{{ anime.coverImage.large}}">
+      </a>
+      {% endfor %}
+    </div>
+{% endif %}
+
+{% if recentlyUpdated %}
+  <p>Recently Updated</p>
+    <div class="row valign-wrapper anime-container">
+      {% for anime in recentlyUpdated.data.Page.media %}
+      <a href="{{ url_for('/.watch_anime',animeId=anime.id)}}">
+        <img class="anime-title" src="{{ anime.coverImage.large}}">
+      </a>
+      {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static',filename='home.js') }}">
+
+</script>
+{% endblock %}

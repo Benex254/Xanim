@@ -1,0 +1,10 @@
+.anime-container {
+  overflow-x: scroll;
+}
+.anime-container::-webkit-scrollbar {
+  display: none;
+}
+.anime-title {
+  height: 200px;
+  padding: 5px;
+}

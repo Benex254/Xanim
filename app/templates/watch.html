@@ -1,0 +1,91 @@
+{% extends "base.html" %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='watch.css') }}" />
+<link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+{% endblock %} {% block body %} {% if anime and animeInfo %}
+<div class="row halign-wrapper">
+  <p class="left-align">{{ animeInfo.title.english or animeInfo.title.romaji }}</p>
+</div>
+
+<div class="row">
+  <div class="col s12 l8">
+    <video-js
+      id="player"
+      class="responsive-video"
+      controls
+      preload="auto"
+      data-setup="{}"
+      type="application/x-mpegURL"
+    >
+ 
+    </video-js>
+  </div>
+  <div class="col  l4 sidebar">
+
+    <div class="row controls">
+      <div class="col s12 m4">
+      <!-- Dropdown Trigger -->
+      <a class="dropdown-trigger btn" href="#" data-target="servers">Servers</a>
+
+      <!-- Dropdown Structure -->
+      <ul id="servers" class="dropdown-content"></ul>
+      </div>
+      <div class="col s6 m4">
+      <button
+          class="btn"
+          onclick="prevEpisode('{{ anime.id }}','{{ anime.title }}')"
+          >
+          Previous Episode
+      </button>
+      </div>
+      <div class="col s6 m4">
+        <button
+
+            class="btn"
+            onclick="nextEpisode('{{ anime.id }}','{{ anime.title }}')"
+            >
+            Next Episode 
+        </button>
+    </div>
+    </div>
+      <div class="row">
+        sub
+      </div>
+    <div class="row episodes">
+
+      <div class="row episodes-bar">
+        {% for episode in anime.availableEpisodesDetail.sub %}
+        <button
+            class="episode"
+          onClick="loadEpisode('{{ anime.id }}','{{ anime.title }}','{{ episode }}','sub')"
+        >
+          {{ episode }}
+        </button>
+        {% endfor %}
+      </div>
+      <div class="row">
+        Dub
+      </div>
+      <div class="row episodes-bar">
+        {% for episode in anime.availableEpisodesDetail.dub %}
+        <button
+            class="episode"
+          onclick="loadEpisode('{{ anime.id }}','{{ anime.title }}','{{ episode }}','dub')"
+        >
+          {{ episode }}
+        </button>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
+{% else %}
+<div>
+something wen wrong
+</div>
+{% endif %} {% endblock %} {% block scripts %}
+<script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script src="{{ url_for('static',filename='watch.js') }}"></script>
+{% endblock %}

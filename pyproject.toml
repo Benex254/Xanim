@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "xanim"
+version = "0.1.0"
+description = "Website built on top of fastanime"
+authors = ["Benex254 <benextempest@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Flask = "^3.0.3"
+fastanime = "^2.3.4"
+gunicorn = "^23.0.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.1"
+isort = "^5.13.2"
+black = "^24.8.0"
+pyright = "^1.1.376"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
